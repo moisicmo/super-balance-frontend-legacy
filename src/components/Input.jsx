@@ -13,7 +13,6 @@ export const ComponentInput = React.memo(({ id, name, value, onChange, type, lab
             onChange={onChange}
             style={{
                 width: '100%',
-                marginBottom: '10px',
             }}
             InputLabelProps={{
                 style: {
@@ -24,6 +23,8 @@ export const ComponentInput = React.memo(({ id, name, value, onChange, type, lab
                 endAdornment,
                 style: {
                     color: 'grey',
+                    height: '50px',
+                    // paddingBottom: '6px',
                 },
                 classes: {
                     focused: {
@@ -35,8 +36,10 @@ export const ComponentInput = React.memo(({ id, name, value, onChange, type, lab
             sx={{
                 '& .MuiOutlinedInput-root': {
                     borderRadius: '10px',
+                    // height: 'fit-content',
+                    // padding: '6px',
                 },
             }}
         />
-    )
-})
+    );
+});

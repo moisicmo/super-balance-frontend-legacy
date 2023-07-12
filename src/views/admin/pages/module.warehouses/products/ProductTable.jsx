@@ -177,7 +177,7 @@ export const ProductTable = React.memo((props) => {
                                                 </IconButton>
                                             </TableCell>
                                             <TableCell component="th" scope="row">
-                                                SADSADD
+                                                {product.code}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
                                                 {product.name}

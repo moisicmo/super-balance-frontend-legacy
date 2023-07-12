@@ -9,6 +9,7 @@ export const warehouseSlice = createSlice({
         products: [],
         productStatus: [],
         kardexProducts: [],
+        cartProducts: [],
     },
     reducers: {
         //warehouse
@@ -134,6 +135,9 @@ export const warehouseSlice = createSlice({
         setAddKardexProduct: (state, action) => {
             state.kardexProducts = [...state.kardexProducts, action.payload.kardexProduct];
         },
+        setAddCartProduct: (state, action) => {
+            state.cartProducts = [...state.cartProducts, action.payload.product];
+        },
     }
 });
 
@@ -168,5 +172,6 @@ export const {
     //kardex
     setKardexProduct,
     setAddKardexProduct,
-
+    //cart product
+    setAddCartProduct,
 } = warehouseSlice.actions;

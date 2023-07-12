@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { selectionSlice, authSlice, uiSlice, eventSlice, userSlice, reportSlice, warehouseSlice } from './';
+import { selectionSlice, authSlice, uiSlice, eventSlice, userSlice, reportSlice, warehouseSlice, customerSlice } from './';
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +11,7 @@ export const store = configureStore({
         events: eventSlice.reducer,
         users: userSlice.reducer,
         warehouses: warehouseSlice.reducer,
+        customers: customerSlice.reducer,
         reports: reportSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

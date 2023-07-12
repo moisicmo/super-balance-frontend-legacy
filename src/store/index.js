@@ -6,5 +6,6 @@ export * from './event/eventSlices';
 export * from './user/userSlices';
 export * from './report/reportSlices';
 export * from './warehouse/warehouseSlices';
+export * from './customer/customerSlices';
 
 export * from './store';
