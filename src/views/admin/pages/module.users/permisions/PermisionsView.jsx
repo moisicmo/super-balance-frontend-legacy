@@ -4,7 +4,7 @@ import { Box, Container, Stack } from "@mui/system";
 import { useSelector } from "react-redux";
 import { PermisionTable } from "./";
 import { usePermisionStore } from "../../../../../hooks";
-import { applyPagination } from "../../../../../utils/ApplyPagination";
+import { applyPagination } from "../../../../../utils/applyPagination";
 import { ComponentInput } from "../../../../../components";
 
 export const PermisionsView = () => {

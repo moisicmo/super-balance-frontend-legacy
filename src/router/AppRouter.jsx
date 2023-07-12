@@ -14,10 +14,10 @@ import { Usersview } from '../views/admin/pages/module.users/users';
 //module warehouses
 import { ProductsView } from '../views/admin/pages/module.warehouses/products';
 import { WarehousesView } from '../views/admin/pages/module.warehouses/warehouses';
-import { OutputProductsView } from '../views/admin/pages/module.warehouses/outputs/outputProductsView';
 import { KardexProductsView } from '../views/admin/pages/module.warehouses/kardexProducts/KardexProductsView';
 import { CustomersView } from '../views/admin/pages/module.customers/customers/CustomersView';
 import { SalesView } from '../views/admin/pages/module.warehouses/sales/SalesView';
+import { OrdersView } from '../views/admin/pages/module.warehouses/orders/OrdersView';
 
 export const AppRouter = () => {
 
@@ -45,7 +45,7 @@ export const AppRouter = () => {
                     <Route path="/productsView" element={<ProductsView />} />
                     <Route path="/movementsView" element={<KardexProductsView />} />
                     <Route path="/salesView" element={<SalesView />} />
-                    <Route path="/ordersView" element={<OutputProductsView />} />
+                    <Route path="/ordersView" element={<OrdersView />} />
                     {/* module customers */}
                     <Route path="/customersView" element={<CustomersView />} />
                     <Route path="/creditsView" element={<TypeUsersView />} />

@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Chip, Grid, SvgIcon, Typography } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
-import { applyPagination } from "../../../../utils/ApplyPagination";
+import { applyPagination } from "../../../../utils/applyPagination";
 import { useSelector } from "react-redux";
 // import { useCategorieStore, useReportStore } from "../../../../../hooks";
 // import { CarrerTable, ShowCarrers } from "../users";

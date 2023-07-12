@@ -3,11 +3,11 @@ import { Button, SvgIcon, Typography } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
 import { Add } from "@mui/icons-material";
 import { WarehouseTable } from ".";
-import { applyPagination } from "../../../../../utils/ApplyPagination";
 import { useSelector } from "react-redux";
 import { CreateWarehouse } from ".";
 import { useWarehouseStore } from "../../../../../hooks";
 import { ComponentInput } from "../../../../../components";
+import { applyPagination } from "../../../../../utils/applyPagination";
 
 export const WarehousesView = () => {
     // Acceder a las funciones getTypeUser y putTypeUser desde el custom hook useTypeUserStore

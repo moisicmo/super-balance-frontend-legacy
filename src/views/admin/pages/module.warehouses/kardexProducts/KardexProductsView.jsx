@@ -7,7 +7,7 @@ import { ComponentDraw, ComponentDateRange } from "../../../../../components";
 import { Add } from "@mui/icons-material";
 import { useKardexProductStore, useProductStore, useWarehouseStore } from "../../../../../hooks";
 import { WarehouseTable } from "../warehouses";
-import { applyPagination } from "../../../../../utils/ApplyPagination";
+import { applyPagination } from "../../../../../utils/applyPagination";
 import { KardexProductTable } from "./KardexProductTable";
 import { CreateReceptionProduct } from "./CreateReceptionProduct";
 

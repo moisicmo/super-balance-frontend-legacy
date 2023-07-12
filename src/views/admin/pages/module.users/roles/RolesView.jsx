@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, SvgIcon, Typography } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
 import { Add } from "@mui/icons-material";
-import { applyPagination } from "../../../../../utils/ApplyPagination";
+import { applyPagination } from "../../../../../utils/applyPagination";
 import { useSelector } from "react-redux";
 import { CreateRole, RoleTable, ShowPermisions } from "./";
 import { usePermisionStore, useRoleStore, useSelectorStore } from "../../../../../hooks";

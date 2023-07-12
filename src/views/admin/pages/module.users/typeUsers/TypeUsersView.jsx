@@ -3,7 +3,7 @@ import { Button, SvgIcon, Typography } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
 import { Add } from "@mui/icons-material";
 import { TypeUserTable } from "./";
-import { applyPagination } from "../../../../../utils/ApplyPagination";
+import { applyPagination } from "../../../../../utils/applyPagination";
 import { useSelector } from "react-redux";
 import { CreateTypeUser } from "./";
 import { useTypeUserStore } from "../../../../../hooks";

@@ -39,9 +39,12 @@ export const SalesView = () => {
         const dispatch = useDispatch();
 
         const AddItem = (product) => {
+            console.log(quantity)
+            const newProduct = { ...product, quantity }
+            // product.quantity = quantity;
 
-            console.log(product)
-            dispatch(setAddCartProduct({ product }))
+            console.log(newProduct)
+            dispatch(setAddCartProduct({ product: newProduct }))
 
         }
         return (
@@ -99,7 +102,12 @@ export const SalesView = () => {
                             </TableHead>
                             <TableBody>
                                 {products
-                                    .filter((product) => search !== "" && ((product.name.trim().toUpperCase().includes(search.trim().toUpperCase())) || (product.code.trim().toUpperCase().includes(search.trim().toUpperCase()))))
+                                    .filter(product => !cartProducts.map(e => e.id).includes(product.id))
+                                    .filter((product) => search !== "" && (
+                                        (product.name.trim().toUpperCase().includes(search.trim().toUpperCase())) ||
+                                        (product.code.trim().toUpperCase().includes(search.trim().toUpperCase()))
+                                    )
+                                    )
                                     .map((product) => (
                                         <Row key={product.id} product={product} />
                                     )
@@ -118,10 +126,10 @@ export const SalesView = () => {
                     <TableContainer component={Paper} style={{ overflowY: 'auto' }} sx={{ padding: '5px' }}>
                         <Table size="small" aria-label="a dense table">
                             <TableBody>
-                                {cartProducts.map((row) => (
-                                    <TableRow key={row.id}>
+                                {cartProducts.map((product) => (
+                                    <TableRow key={product.id}>
                                         <TableCell component="th" >
-                                            {row.name}
+                                            {product.name}
                                         </TableCell>
                                         <TableCell component="th" >
                                             <Stack
@@ -134,23 +142,13 @@ export const SalesView = () => {
                                                 >
                                                     <Remove color="info" />
                                                 </IconButton>
-                                                {/* <Grid item xs={12} sm={2} sx={{ padding: '5px' }}>
-                                                    <ComponentInput type="text" label="Cantidad" name="name" value={name} onChange={onInputChange} />
-                                                </Grid> */}
+                                                {product.quantity}
                                                 <IconButton
                                                     onClick={() => onDelete(rol.id)}
                                                 >
                                                     <Add color="error" />
                                                 </IconButton>
                                             </Stack>
-                                        </TableCell>
-                                        <TableCell component="th" >
-                                            <Button
-                                                onClick={() => { }}
-                                                startIcon={<SvgIcon fontSize="small"><AddShoppingCartOutlined /></SvgIcon>}
-                                                variant="contained"
-                                            >
-                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}

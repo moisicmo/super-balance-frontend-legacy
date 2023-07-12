@@ -1,7 +1,7 @@
 import { Button, Drawer, Grid, Stack, SvgIcon, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { applyPagination } from "../utils/ApplyPagination";
+import { applyPagination } from "../utils/applyPagination";
 import { Add } from "@mui/icons-material";
 
 export const ComponentDraw = React.memo(({

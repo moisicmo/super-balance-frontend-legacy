@@ -3,7 +3,7 @@ import { Button, SvgIcon, Typography } from "@mui/material";
 import { Box, Container, Stack } from "@mui/system";
 import { Add } from "@mui/icons-material";
 import { ProductTable } from ".";
-import { applyPagination } from "../../../../../utils/ApplyPagination";
+import { applyPagination } from "../../../../../utils/applyPagination";
 import { useSelector } from "react-redux";
 import { CreateProduct } from ".";
 import { useCategoryStore, useProductStore, useUnitMeasurementStore } from "../../../../../hooks";
@@ -62,7 +62,6 @@ export const ProductsView = () => {
 
     // Actualizar la lista de typeUsers cuando cambie la búsqueda, la página o las filas por página
     useEffect(() => {
-        console.log('hola')
         if (search && search.trim() !== "") {
             const filteredProducts = products.filter((e) =>
                 e.name.includes(search.trim())
