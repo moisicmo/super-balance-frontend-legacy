@@ -25,8 +25,16 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
 
 
 
-    const onInputChange = ({ target }, uppercase = false) => {
+    const onInputChange = ({ target }, uppercase = false, onlynumber = false) => {
+
         const { name, value } = target;
+        if (onlynumber) {
+            const regex = /^[0-9\b]+$/;
+            return setFormState({
+                ...formState,
+                [name]: regex.test(value) ? value : ""
+            })
+        }
         setFormState({
             ...formState,
             [name]: uppercase ? value.toUpperCase() : value

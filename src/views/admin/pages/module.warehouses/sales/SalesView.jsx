@@ -54,7 +54,7 @@ export const SalesView = () => {
                         {product.name}
                     </TableCell>
                     <TableCell component="th" >
-                        <ComponentInput type="text" label="" name="quantity" value={quantity} onChange={onInputChange} />
+                        <ComponentInput type="text" label="" name="quantity" value={quantity} onChange={(v) => onInputChange(v, false, true)} />
                     </TableCell>
                     <TableCell component="th">
                         <IconButton
@@ -81,7 +81,7 @@ export const SalesView = () => {
                             label="Buscar Producto"
                             name="search"
                             value={search}
-                            onChange={onInputChange}
+                            onChange={(v) => onInputChange(v, true)}
                         />
                     </div>
 
