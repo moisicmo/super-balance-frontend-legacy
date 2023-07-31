@@ -72,7 +72,6 @@ export const ProductTable = React.memo((props) => {
             <TableContainer>
                 <Box sx={{ overflowX: 'auto' }}>
                     <Table>
-
                         <TableHead>
                             <TableRow>
                                 {

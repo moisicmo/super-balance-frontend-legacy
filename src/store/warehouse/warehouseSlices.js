@@ -135,8 +135,21 @@ export const warehouseSlice = createSlice({
         setAddKardexProduct: (state, action) => {
             state.kardexProducts = [...state.kardexProducts, action.payload.kardexProduct];
         },
+        //Cart
         setAddCartProduct: (state, action) => {
             state.cartProducts = [...state.cartProducts, action.payload.product];
+        },
+        setUpdateCartProduct: (state, action) => {
+            state.cartProducts = [...state.cartProducts.map((e) => {
+                if (e.id === action.payload.product) {
+                    return {
+                        ...action.payload.product
+                    }
+                }
+            })];
+        },
+        setDeleteCartProduct: (state, action) => {
+            state.cartProducts = [...state.cartProducts.filter(e => e.id != action.payload.id)];
         },
     }
 });
@@ -174,4 +187,6 @@ export const {
     setAddKardexProduct,
     //cart product
     setAddCartProduct,
+    setUpdateCartProduct,
+    setDeleteCartProduct,
 } = warehouseSlice.actions;

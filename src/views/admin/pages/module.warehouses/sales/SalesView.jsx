@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Grid, IconButton, Paper, SvgIcon, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Card, Collapse, Grid, IconButton, Paper, SvgIcon, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { Add, AddShoppingCartOutlined, Remove } from "@mui/icons-material";
+import { Add, AddShoppingCartOutlined, DeleteOutline, KeyboardArrowDownOutlined, KeyboardArrowUpOutlined, Remove, RemoveCircleOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, useProductStore } from "../../../../../hooks";
 import { ComponentInput } from "../../../../../components";
@@ -33,25 +33,24 @@ export const SalesView = () => {
         getCustomers();
     }, []);
 
-    function Row({ product }) {
-        const [open, setOpen] = useState(false);
-        const { quantity, onInputChange, onResetForm } = useForm(formFields);
+
+
+    function RowProductStatus({ product, productStatus }) {
+
         const dispatch = useDispatch();
-
+        const { quantity, onInputChange, onResetForm } = useForm(formFields);
         const AddItem = (product) => {
-            console.log(quantity)
-            const newProduct = { ...product, quantity }
-            // product.quantity = quantity;
-
+            const newProductStatus = { ...productStatus, quantity }
+            const newProduct = { ...product, productStatus: newProductStatus }
             console.log(newProduct)
             dispatch(setAddCartProduct({ product: newProduct }))
 
         }
         return (
             <>
-                <TableRow key={product.id} style={{ height: '50px' }}>
-                    <TableCell component="th">
-                        {product.name}
+                <TableRow >
+                    <TableCell component="th" scope="row">
+                        {productStatus.name}
                     </TableCell>
                     <TableCell component="th" >
                         <ComponentInput type="text" label="" name="quantity" value={quantity} onChange={(v) => onInputChange(v, false, true)} />
@@ -65,11 +64,67 @@ export const SalesView = () => {
                     </TableCell>
                 </TableRow>
             </>
+        )
+    }
+    function Row({ product }) {
+        const [openIndex, setOpenIndex] = useState(null);
+        return (
+            <>
+                <TableRow key={product.id} >
+                    <TableCell component="th">
+                        <IconButton
+                            aria-label="expand row"
+                            size="small"
+                            onClick={() => {
+                                if (openIndex == product.id) {
+                                    setOpenIndex(null)
+                                } else {
+
+                                    setOpenIndex(product.id);
+                                }
+                            }}
+                        >
+                            {openIndex == product.id ? <KeyboardArrowUpOutlined /> : <KeyboardArrowDownOutlined />}
+                        </IconButton>
+                    </TableCell>
+                    <TableCell component="th">
+                        {product.name}
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                        <Collapse in={openIndex == product.id} timeout="auto" unmountOnExit>
+                            <Box sx={{ margin: 1 }}>
+                                <Stack direction="row" justifyContent="space-between">
+                                    <Stack spacing={1}>
+                                        <Typography>Estados del producto: {product.name}</Typography>
+                                    </Stack>
+                                </Stack>
+
+                                <Table size="small" aria-label="purchases">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Estado</TableCell>
+                                            <TableCell>Cantidad</TableCell>
+                                            <TableCell>Acción</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {product.productStatus.map((productStatus) => (
+                                            <RowProductStatus key={productStatus.id} product={product} productStatus={productStatus} />
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Box>
+                        </Collapse>
+                    </TableCell>
+                </TableRow>
+            </>
         );
     }
     return (
         <Grid container>
-            <Grid item xs={12} sm={7} sx={{ padding: '5px' }}>
+            <Grid item xs={12} sm={6} sx={{ padding: '5px' }}>
                 <Stack spacing={1}>
                     <Typography variant="h5">Punto de venta</Typography>
                 </Stack>
@@ -87,30 +142,22 @@ export const SalesView = () => {
 
                     <div style={{ overflowY: 'auto', maxHeight: 300 }}>
                         <Table size="small" aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell style={{ width: '50%' }}>
-                                        Nombre
-                                    </TableCell>
-                                    <TableCell style={{ width: '15%' }}>
-                                        Cantidad
-                                    </TableCell>
-                                    <TableCell style={{ width: '15%' }}>
-                                        Acción
-                                    </TableCell>
-                                </TableRow>
-                            </TableHead>
                             <TableBody>
                                 {products
-                                    .filter(product => !cartProducts.map(e => e.id).includes(product.id))
                                     .filter((product) => search !== "" && (
                                         (product.name.trim().toUpperCase().includes(search.trim().toUpperCase())) ||
                                         (product.code.trim().toUpperCase().includes(search.trim().toUpperCase()))
                                     )
                                     )
-                                    .map((product) => (
-                                        <Row key={product.id} product={product} />
-                                    )
+                                    .map((product) => {
+                                        const newProduct = {
+                                            ...product,
+                                            productStatus: [...product.productStatus.filter(e => !cartProducts.map(e => e.productStatus.id).includes(e.id))]
+                                        };
+                                        return newProduct.productStatus.length > 0 && (
+                                            <Row key={newProduct.id} product={newProduct} />
+                                        )
+                                    }
                                     )}
                             </TableBody>
                         </Table>
@@ -118,7 +165,7 @@ export const SalesView = () => {
 
                 </TableContainer>
             </Grid>
-            <Grid item xs={12} sm={5} sx={{ padding: '5px' }}>
+            <Grid item xs={12} sm={6} sx={{ padding: '5px' }}>
                 <Card >
                     <Stack spacing={1}>
                         <Typography >Carrito de compras</Typography>
@@ -127,9 +174,9 @@ export const SalesView = () => {
                         <Table size="small" aria-label="a dense table">
                             <TableBody>
                                 {cartProducts.map((product) => (
-                                    <TableRow key={product.id}>
+                                    <TableRow key={product.productStatus.id}>
                                         <TableCell component="th" >
-                                            {product.name}
+                                            {product.name} - {product.productStatus.name}
                                         </TableCell>
                                         <TableCell component="th" >
                                             <Stack
@@ -142,13 +189,21 @@ export const SalesView = () => {
                                                 >
                                                     <Remove color="info" />
                                                 </IconButton>
-                                                {product.quantity}
+                                                {product.productStatus.quantity}
                                                 <IconButton
                                                     onClick={() => onDelete(rol.id)}
                                                 >
                                                     <Add color="error" />
                                                 </IconButton>
+
                                             </Stack>
+                                        </TableCell>
+                                        <TableCell component="th" >
+                                            <IconButton
+                                                onClick={() => onDelete(rol.id)}
+                                            >
+                                                <DeleteOutline color="error" />
+                                            </IconButton>
                                         </TableCell>
                                     </TableRow>
                                 ))}

@@ -85,6 +85,9 @@ export const KardexProductTable = React.memo((props) => {
                                     Cantidad
                                 </TableCell>
                                 <TableCell>
+                                    Fecha
+                                </TableCell>
+                                <TableCell>
                                     Precio
                                 </TableCell>
                                 <TableCell>
@@ -135,6 +138,9 @@ export const KardexProductTable = React.memo((props) => {
                                         </TableCell>
                                         <TableCell>
                                             {kardexProduct.inputOrOutput.quatity}
+                                        </TableCell>
+                                        <TableCell>
+                                            {kardexProduct.inputOrOutput.createdAt}
                                         </TableCell>
                                         <TableCell>
                                             {kardexProduct.inputOrOutput.price}
