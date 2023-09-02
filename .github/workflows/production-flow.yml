@@ -1,4 +1,4 @@
-name: Deployement App
+name: First Github Actions Workflow
 
 on:
   push:
@@ -6,14 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  saludo:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-      - name: Install dependecies
-        run: npm install
+        - run: echo Hola mundo!
