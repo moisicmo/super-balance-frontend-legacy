@@ -1,0 +1,12 @@
+name: First Github Actions Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  saludo:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo Hola mundo!
